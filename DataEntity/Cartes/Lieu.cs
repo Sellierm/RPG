@@ -1,4 +1,6 @@
-namespace DataEntity.Map
+using DataEntity.Personnages;
+
+namespace DataEntity.Cartes
 {
     public class Lieu
     {

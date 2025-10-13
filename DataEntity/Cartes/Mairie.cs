@@ -1,4 +1,4 @@
-﻿namespace DataEntity.Map
+﻿namespace DataEntity.Cartes
 {
     public class Mairie : Batiment
     {

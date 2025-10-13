@@ -1,4 +1,6 @@
-﻿namespace DataEntity
+﻿using DataEntity.Enum;
+
+namespace DataEntity.Objets
 {
     public abstract class Objet
     {
@@ -9,6 +11,5 @@
        public EffetType Effet { get; set; }
        public int EffetValeur { get; set; }
        public ERarete Rarete { get; set; }
-
     }
 }

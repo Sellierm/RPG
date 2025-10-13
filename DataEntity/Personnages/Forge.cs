@@ -1,4 +1,7 @@
-﻿namespace DataEntity.Map
+﻿using DataEntity.Cartes;
+using DataEntity.Objets;
+
+namespace DataEntity.Personnages
 {
     public class Forge : Batiment
     {

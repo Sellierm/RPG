@@ -1,4 +1,4 @@
-﻿namespace DataEntity
+﻿namespace DataEntity.Enum
 {
     public enum ERarete
     {

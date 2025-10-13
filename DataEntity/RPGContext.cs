@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using DataEntity.Objets;
+using DataEntity.Personnages;
 
 namespace DataEntity
 {
@@ -6,12 +8,11 @@ namespace DataEntity
     {
         private string _dbPath;
         public DbSet<Consommable> ConsommablesDbSet { get; set; }
-        public DbSet<Personnage> PersonnagesDbSet { get; set; }
-        // Ajoutez d'autres DbSet pour les ennemis, cartes, etc.
+        public DbSet<Hero> HerosDbSet { get; set; }
 
         public RPGContext()
         {
-            _dbPath = "RPG.db";
+            _dbPath = "../../../../Database/RPG.db";
             Database.EnsureCreated();
         }
 

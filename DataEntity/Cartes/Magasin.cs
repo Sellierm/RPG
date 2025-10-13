@@ -1,4 +1,6 @@
-﻿namespace DataEntity.Map
+﻿using DataEntity.Objets;
+
+namespace DataEntity.Cartes
 {
     public class Magasin : Batiment
     {

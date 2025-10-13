@@ -1,4 +1,4 @@
-﻿namespace DataEntity
+﻿namespace DataEntity.Personnages
 {
     public abstract class Personnage
     {
@@ -8,6 +8,6 @@
         public int PointsDeVie { get; set; }
         public int Force { get; set; }
         public int Energie { get; set; }
-        public int vitesse { get; set; }
+        public int Vitesse { get; set; }
     }
 }
