@@ -1,0 +1,9 @@
+namespace DataEntity.Map
+{
+    public abstract class Batiment
+    {
+        public int Id { get; set; }
+        public string Nom { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+    }
+}

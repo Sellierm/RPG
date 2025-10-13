@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG", "RPG\RPG.csproj", "{34CF5E8B-DE86-4A8C-8989-4D7023E7C87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGEditor", "RPGEditor\RPGEditor.csproj", "{D8B66881-EBA3-4772-B1A2-E72C0A33556D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEntity", "DataEntity\DataEntity.csproj", "{82B8B710-39C9-4EFB-8F10-4EFECEB3A14B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34CF5E8B-DE86-4A8C-8989-4D7023E7C87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34CF5E8B-DE86-4A8C-8989-4D7023E7C87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34CF5E8B-DE86-4A8C-8989-4D7023E7C87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34CF5E8B-DE86-4A8C-8989-4D7023E7C87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B66881-EBA3-4772-B1A2-E72C0A33556D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B66881-EBA3-4772-B1A2-E72C0A33556D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B66881-EBA3-4772-B1A2-E72C0A33556D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B66881-EBA3-4772-B1A2-E72C0A33556D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82B8B710-39C9-4EFB-8F10-4EFECEB3A14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82B8B710-39C9-4EFB-8F10-4EFECEB3A14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82B8B710-39C9-4EFB-8F10-4EFECEB3A14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82B8B710-39C9-4EFB-8F10-4EFECEB3A14B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7CC6EF9-B1D5-4B12-B3FB-C942A09EF4C3}
+	EndGlobalSection
+EndGlobal
