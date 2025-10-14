@@ -1,0 +1,15 @@
+{
+  "InventaireConsommable": [],
+  "InventaireArme": [],
+  "InventaireArmure": [],
+  "Niveau": 1,
+  "Experience": 0,
+  "Gold": 100,
+  "Id": 1,
+  "Nom": "Arthas",
+  "Description": "Un chevalier courageux",
+  "PointsDeVie": 100,
+  "Force": 20,
+  "Energie": 30,
+  "Vitesse": 15
+}
