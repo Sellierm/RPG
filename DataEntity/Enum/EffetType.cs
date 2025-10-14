@@ -1,4 +1,4 @@
-namespace DataEntity.Enum
+namespace DataEntity
 {
     public enum EffetType
     {

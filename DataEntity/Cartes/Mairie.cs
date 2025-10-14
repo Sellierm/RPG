@@ -1,10 +1,7 @@
-﻿namespace DataEntity.Cartes
+﻿namespace DataEntity
 {
     public class Mairie : Batiment
     {
-        public void Sauvegarder()
-        {
 
-        }
     }
 }

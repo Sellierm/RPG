@@ -1,6 +1,4 @@
-﻿using DataEntity.Enum;
-
-namespace DataEntity.Objets
+﻿namespace DataEntity
 {
     public class Consommable : Objet
     {

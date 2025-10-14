@@ -1,4 +1,4 @@
-namespace DataEntity.Cartes
+namespace DataEntity
 {
     public abstract class Batiment
     {
@@ -6,4 +6,4 @@ namespace DataEntity.Cartes
         public string Nom { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
     }
-}
+} 

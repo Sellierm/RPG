@@ -1,4 +1,4 @@
-﻿namespace DataEntity.Objets
+﻿namespace DataEntity
 {
     public class Arme : Objet
     {

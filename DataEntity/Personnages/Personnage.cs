@@ -1,4 +1,4 @@
-﻿namespace DataEntity.Personnages
+﻿namespace DataEntity
 {
     public abstract class Personnage
     {

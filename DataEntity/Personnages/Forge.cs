@@ -1,10 +1,13 @@
-﻿using DataEntity.Cartes;
-using DataEntity.Objets;
-
-namespace DataEntity.Personnages
+﻿namespace DataEntity
 {
     public class Forge : Batiment
     {
-        public List<Arme> ArmesDisponibles { get; set; } = new();
+        public virtual List<Arme> ArmesDisponibles { get; set; } = new();
+        public Forge() { }
+        public Forge(string name, string description)
+        {
+            Nom = name;
+            Description = description;
+        }
     }
 }
