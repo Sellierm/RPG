@@ -5,7 +5,6 @@
         public int Niveau { get; set; }
         public int Experience { get; set; }
         public int Gold { get; set; }
-        public virtual Carte? CarteActuelle { get; set; }
         public virtual Lieu? LieuActuel { get; set; }
         public virtual Batiment? BatimentActuel { get; set; }
         public virtual List<Consommable> InventaireConsommable { get; set; } = new List<Consommable>();
@@ -16,7 +15,7 @@
 
         //constructor,
         public Hero() { }
-        public Hero(string nom, string description, int pointsDeVie, int force, int energie, int vitesse, int niveau, int experience, int gold)
+        public Hero(string nom, string description, int pointsDeVie, int force, int energie, int vitesse, int niveau, int experience, int gold, Lieu? lieuActuel = null, Batiment? batimentActuel = null)
         {
             Nom = nom;
             Description = description;
@@ -28,10 +27,10 @@
             Experience = experience;
             Gold = gold;
 
-            BatimentActuel = null;
+            LieuActuel = lieuActuel;
+            BatimentActuel = batimentActuel;
             InventaireConsommable = new List<Consommable>();
             InventaireArme = new List<Arme>();
-
         }
     }
 }

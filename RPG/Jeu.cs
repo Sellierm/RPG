@@ -3,11 +3,14 @@ using Newtonsoft.Json;
 
 namespace RPG
 {
-    public class Jeu : IDisposable
+    public class Jeu
     {
         private readonly RPGContext _context;
         private bool _enCours;
         public Hero? HeroActuel { get; private set; }
+        private Carte? CarteDeJeu { get; set; }
+        private List<Lieu> LieuList { get; set; } = new();
+        private List<Batiment> BatimentList { get; set; } = new();
 
         public Jeu()
         {
@@ -17,7 +20,6 @@ namespace RPG
         public void Demarrer()
         {
             InitialiserDonneesSiNecessaire();
-
             _enCours = true;
             Console.WriteLine("Bienvenue dans le RPG !");
             while (_enCours)
@@ -27,10 +29,10 @@ namespace RPG
                 switch (choix)
                 {
                     case "1":
-                        AfficherHero();
+                        SelectionnerHero();
+                        ChargerDonneesJeu();
                         break;
                     case "2":
-                        //ExplorerLieux();
                         Sauvegarder();
                         break;
                     case "3":
@@ -38,6 +40,9 @@ namespace RPG
                         break;
                     case "4":
                         AfficherTousLesHeros();
+                        break;
+                    case "5":
+                        CreerHero();
                         break;
                     default:
                         Console.WriteLine("Choix invalide.");
@@ -49,10 +54,11 @@ namespace RPG
         private void AfficherMenu()
         {
             Console.WriteLine("\nMenu principal :");
-            Console.WriteLine("1. Afficher le héros");
+            Console.WriteLine("1. Continuer");
             Console.WriteLine("2. Sauvegarder");
             Console.WriteLine("3. Quitter");
             Console.WriteLine("4. Afficher tous les héros");
+            Console.WriteLine("5. Créer un nouveau héros");
             Console.Write("Choix : ");
         }
 
@@ -61,11 +67,11 @@ namespace RPG
             // Cartes + Lieux
             if (!_context.CartesDbSet.Any())
             {
-                var lieux = new List<Lieu>
-                {
-                    new Lieu("Forêt Enchantée", "Une forêt mystérieuse remplie de créatures magiques."),
-                    new Lieu("Plaines Venteuses", "De vastes étendues d'herbe battues par les vents.")
-                };
+                var auberge = new Auberge("Auberge du Voyageur", "Un endroit pour se reposer.");
+                //ajoute Auberge à un lieu
+                var lieuAvecAuberge = new Lieu("Village de départ", "Un petit village paisible.", auberge: auberge);
+                var lieux = new List<Lieu>();
+                lieux.Add(lieuAvecAuberge);
                 var carte = new Carte("Carte du Royaume", "Une carte générale du royaume.", lieux);
                 _context.CartesDbSet.Add(carte);
                 _context.SaveChanges();
@@ -84,7 +90,9 @@ namespace RPG
                     vitesse: 15,
                     niveau: 1,
                     experience: 0,
-                    gold: 100
+                    gold: 100,
+                    lieuActuel: _context.CartesDbSet.First().Lieux.FirstOrDefault(),
+                    batimentActuel: _context.CartesDbSet.First().Lieux.FirstOrDefault()?.Auberge
                 );
                 HeroActuel= hero;
                 Sauvegarder();
@@ -97,13 +105,13 @@ namespace RPG
                 _context.ConsommablesDbSet.Add(potion);
                 _context.SaveChanges();
             }
-        }
+        }//initialise la bdd si pas de première valeur
 
-        private void AfficherHero()
+        /*private void AfficherHero()
         {
             var hero = ChargerHero("Arthas");
-            /*if (hero is null)
-                hero = _context.HerosDbSet.FirstOrDefault();*/
+            if (hero is null)
+                hero = _context.HerosDbSet.FirstOrDefault();
             if (hero is null)
             {
                 Console.WriteLine("Aucun héros trouvé, assignation à un héro de base");
@@ -117,7 +125,9 @@ namespace RPG
                 $"PV: {hero.PointsDeVie}, Force: {hero.Force}, Energie: {hero.Energie}, " +
                 $"Vitesse: {hero.Vitesse}, Niveau: {hero.Niveau}, XP: {hero.Experience}, Gold: {hero.Gold}"
             );
-        }
+        }*/
+
+        //crd héros
         private void AfficherTousLesHeros()
         {
             var heros = ChargerTousLesHeros();
@@ -132,11 +142,91 @@ namespace RPG
                 Console.WriteLine(
                     $"Nom: {hero.Nom}, Description: {hero.Description}, " +
                     $"PV: {hero.PointsDeVie}, Force: {hero.Force}, Energie: {hero.Energie}, " +
-                    $"Vitesse: {hero.Vitesse}, Niveau: {hero.Niveau}, XP: {hero.Experience}, Gold: {hero.Gold}"
+                    $"Vitesse: {hero.Vitesse}, Niveau: {hero.Niveau}, XP: {hero.Experience}, Gold: {hero.Gold}" +
+                    $"Lieu: {hero.LieuActuel?.Nom ?? "Aucun"}, Batiment: {hero.BatimentActuel?.Nom ?? "Aucun"}"
                 );
             }
         }
+        private void SelectionnerHero()
+        {
+            var heros = ChargerTousLesHeros();
+            if (heros.Count == 0)
+            {
+                Console.WriteLine("Aucun héros trouvé.");
+                return;
+            }
+            Console.WriteLine("Héros disponibles :");
+            for (int i = 0; i < heros.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {heros[i].Nom}");
+            }
+            Console.Write("Choisissez un héros (numéro) ou Entrée pour annuler: ");
+            var choix = Console.ReadLine();
+            if (int.TryParse(choix, out int index) && index >= 1 && index <= heros.Count)
+            {
+                HeroActuel = heros[index - 1];
+                Console.WriteLine($"Héros sélectionné : {HeroActuel.Nom}");
+            }
+        }
+        private void CreerHero()
+        {
+            Console.Write("Nom : ");
+            var nom = Console.ReadLine() ?? "Héros";
+            Console.Write("Description : ");
+            var description = Console.ReadLine() ?? "Un héros courageux";
 
+            Lieu? premierLieu = CarteDeJeu?.Lieux.FirstOrDefault();
+            Auberge? auberge = premierLieu?.Auberge;
+
+            var hero = new Hero(
+                nom: nom,
+                description: description,
+                pointsDeVie: 100,
+                force: 20,
+                energie: 30,
+                vitesse: 15,
+                niveau: 1,
+                experience: 0,
+                gold: 100,
+                lieuActuel: premierLieu,
+                batimentActuel: auberge
+            );
+            HeroActuel = hero;
+            Sauvegarder();
+            Console.WriteLine($"Héros créé");
+        }
+        private void SupprimerHero()
+        {
+            var heros = ChargerTousLesHeros();
+            if (heros.Count == 0)
+            {
+                Console.WriteLine("Aucun héros trouvé.");
+                return;
+            }
+            Console.WriteLine("Héros disponibles :");
+            for (int i = 0; i < heros.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {heros[i].Nom}");
+            }
+            Console.Write("Choisissez un héros à supprimer (numéro) ou Entrée pour annuler: ");
+            var choix = Console.ReadLine();
+            if (int.TryParse(choix, out int index) && index >= 1 && index <= heros.Count)
+            {
+                var hero = heros[index - 1];
+                var filePath = $"../../../../Database/{hero.Nom}.json";
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    Console.WriteLine($"Héros {hero.Nom} supprimé.");
+                    if (HeroActuel == hero)
+                        HeroActuel = null;
+                }
+                else
+                {
+                    Console.WriteLine("Fichier de sauvegarde introuvable.");
+                }
+            }
+        }
         /* private void ExplorerLieux()
          {
              var lieux = _context.CartesDbSet.SelectMany(c => c.Lieux).ToList();
@@ -161,7 +251,24 @@ namespace RPG
              }
          }*/
 
-
+        //charger les données du jeu (carte, lieux, bâtiments)
+        public void ChargerDonneesJeu()
+        {
+            CarteDeJeu = _context.CartesDbSet.FirstOrDefault();
+            if (CarteDeJeu != null)
+            {
+                LieuList = CarteDeJeu.Lieux.ToList();
+                foreach (var lieu in LieuList)
+                {
+                    if (lieu.Auberge != null) BatimentList.Add(lieu.Auberge);
+                    if (lieu.Forge != null) BatimentList.Add(lieu.Forge);
+                    if (lieu.Magasin != null) BatimentList.Add(lieu.Magasin);
+                    if (lieu.Mairie != null) BatimentList.Add(lieu.Mairie);
+                    if (lieu.Donjon != null) BatimentList.Add(lieu.Donjon);
+                }
+            }
+        }
+        //actions
         public void EntrerDans(Batiment batiment)
         {
             HeroActuel.BatimentActuel = batiment;
@@ -251,7 +358,6 @@ namespace RPG
 
             File.WriteAllText($"../../../../Database/{HeroActuel.Nom}.json", json);
             Console.WriteLine("Héros sauvegardé");
-
         }
         public static Hero? ChargerHero(string nomHero)
         {

@@ -5,9 +5,7 @@ namespace DataEntity
     {
         private string _dbPath;
         public DbSet<Consommable> ConsommablesDbSet { get; set; }
-        public DbSet<Hero> HerosDbSet { get; set; }
         public DbSet<Carte> CartesDbSet { get; set; }
-
         public RPGContext()
         {
             _dbPath = "../../../../Database/RPG.db";
