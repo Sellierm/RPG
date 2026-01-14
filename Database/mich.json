@@ -1,15 +1,67 @@
 {
-  "Niveau": 1,
-  "Experience": 0,
-  "Gold": 100,
-  "InventaireConsommable": [],
-  "InventaireArme": [],
-  "InventaireArmure": [],
-  "Id": 0,
   "Nom": "mich",
   "Description": "mich",
-  "PointsDeVie": 100,
-  "Force": 20,
-  "Energie": 30,
-  "Vitesse": 15
+  "Niveau": 4,
+  "Experience": 249,
+  "Gold": 380,
+  "PointsDeVie": 70,
+  "PvMax": 100,
+  "Force": 25,
+  "Energie": 120,
+  "Vitesse": 20,
+  "PointsCompetence": 0,
+  "LieuActuelId": 1,
+  "InventaireArme": [
+    {
+      "Nom": "Épée en Fer",
+      "Valeur": 50,
+      "IntelligenceRequise": 0,
+      "Degats": 15,
+      "Type": "Épée",
+      "Effet": 11,
+      "EffetValeur": 0,
+      "Rarete": 0
+    }
+  ],
+  "ArmeEquipee": {
+    "Nom": "Épée en Fer",
+    "Valeur": 50,
+    "IntelligenceRequise": 0,
+    "Degats": 15,
+    "Type": "Épée",
+    "Effet": 11,
+    "EffetValeur": 0,
+    "Rarete": 0
+  },
+  "InventaireArmure": [
+    {
+      "Nom": "Armure de Cuir",
+      "Valeur": 40,
+      "IntelligenceRequise": 0,
+      "Defense": 5,
+      "Effet": 11,
+      "EffetValeur": 0,
+      "Rarete": 0
+    }
+  ],
+  "ArmureEquipee": {
+    "Nom": "Armure de Cuir",
+    "Valeur": 40,
+    "IntelligenceRequise": 0,
+    "Defense": 5,
+    "Effet": 11,
+    "EffetValeur": 0,
+    "Rarete": 0
+  },
+  "InventaireConsommable": [
+    {
+      "Nom": "Potion de Soin",
+      "Valeur": 20,
+      "IntelligenceRequise": 0,
+      "NombreUtilisation": 3,
+      "Effet": 0,
+      "EffetValeur": 30,
+      "Rarete": 0
+    }
+  ]
 }

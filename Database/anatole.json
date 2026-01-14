@@ -1,0 +1,16 @@
+{
+  "Nom": "anatole",
+  "Description": "ubiizebzfua",
+  "Niveau": 2,
+  "Experience": 0,
+  "Gold": 140,
+  "PointsDeVie": 100,
+  "Force": 20,
+  "Energie": 100,
+  "Vitesse": 15,
+  "PointsCompetence": 5,
+  "LieuActuelId": 1,
+  "InventaireArme": [],
+  "InventaireArmure": [],
+  "InventaireConsommable": []
+}
